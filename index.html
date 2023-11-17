@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Popular Times</title>
+</head>
+<body>
+    <h1>Check Popular Times</h1>
+    <button id="get-data">Get Popular Times</button>
+    <p id="popularity-info"></p>
+
+    <script>
+        document.getElementById('get-data').addEventListener('click', function() {
+            fetch('http://127.0.0.1:5000/get_popular_times')
+
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('popularity-info').innerText = 
+                        typeof data === 'string' ? data : `Current Popularity: ${data}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('popularity-info').innerText = 'Error fetching data';
+                });
+        });
+    </script>
+</body>
+</html>
